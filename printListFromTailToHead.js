@@ -1,5 +1,5 @@
-function ListNode(x){
-    this.val = x;
+function ListNode(val){
+    this.val = val;
     this.next = null;
 }
 

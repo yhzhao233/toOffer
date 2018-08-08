@@ -1,3 +1,5 @@
+//26、判断 B 树是否是 A 树的子树
+
 function TreeNode(x) {
     this.val = x;
     this.left = null;
@@ -7,23 +9,30 @@ function TreeNode(x) {
 function HasSubtree(pRoot1, pRoot2)
 {
     // write code here
-    var result = false;
+    let result = false;
     //依题只有当两棵树都不为空时 B 可能是 A 的子树
     if (pRoot1 !== null && pRoot2 !== null) {
         //若两节点相同，判断B是否为A的子树
-        if (pRoot1.val === pRoot2.val) {
+        if (Equal(pRoot1.val, pRoot2.val)) {
             result = TreeBinTreeA(pRoot1, pRoot2);
         }
         //若不是判断B是否为A的左子树
         if (!result) {
-            result = TreeBinTreeA(pRoot1.left, pRoot2);
+            result = HasSubtree(pRoot1.left, pRoot2);
         }
         //若不是判断B是否为B的右子树
         if (!result) {
-            result = TreeBinTreeA(pRoot1.right, pRoot2);
+            result = HasSubtree(pRoot1.right, pRoot2);
         }
     }
     return result;
+}
+
+function Equal(num1, num2) {
+    if (Math.abs(num1 - num2) < 0.0000001) {
+        return true;
+    }
+    return false;
 }
 
 function TreeBinTreeA(pRoot1, pRoot2) {
@@ -36,7 +45,7 @@ function TreeBinTreeA(pRoot1, pRoot2) {
         return false;
     }
     //若两节点不等，B不是A的子树
-    if (pRoot1.val !== pRoot2.val) {
+    if (!Equal(pRoot1.val, pRoot2.val)) {
         return false;
     }
     //两节点相同时，判断左右节点是否一致

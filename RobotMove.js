@@ -48,3 +48,5 @@ function getDigitSum(num) {
     sum += num;
     return sum;
 }
+
+
